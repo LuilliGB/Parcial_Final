@@ -14,22 +14,10 @@ import java.util.ArrayList;
 public class AgregarTarea extends javax.swing.JFrame {
 
     ArrayList<Tareas> Arraytareas = new ArrayList<Tareas>();
-    Principal P = new Principal();
 
     public AgregarTarea() {
         initComponents();
 
-    }
-
-    public void cargar() {
-        P.T.setRowCount(0);
-        for (int i = 0; i < Arraytareas.size(); i++) {
-            P.T.addRow(new Object[]{
-                Arraytareas.get(i).getFecha(),
-                Arraytareas.get(i).getNombretarea(),
-                Arraytareas.get(i).getEncargado(),});
-
-        }
     }
 
     /**
@@ -162,33 +150,27 @@ public class AgregarTarea extends javax.swing.JFrame {
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
 
-        String fecha = Txtfechatarea.getText();
-        String nombretarea = Txtnombretarea.getText();
-        String encargado = TxtEncaragadotarea.getText();
+        Pantalla_Principal T = new Pantalla_Principal();
+        T.setVisible(true);
+        String tarea = Txtfechatarea.getText();
+        String responsable = Txtnombretarea.getText();
+        String fecha = TxtEncaragadotarea.getText();
 
-        Tareas TA = new Tareas();
-        TA.setFecha(fecha);
-        TA.setNombretarea(nombretarea);
-        TA.setEncargado(encargado);
+        String Datos[] = {tarea, responsable, fecha};
 
-        Arraytareas.add(TA);
-        Txtfechatarea.setText("");
-        Txtnombretarea.setText("");
-        TxtEncaragadotarea.setText("");
-
-        cargar();
-
-
+        Pantalla_Principal.table.addRow(Datos);
+        
+        this.dispose();
+        
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
     private void BtniraprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtniraprincipalActionPerformed
-      
-        
-        Principal PR = new Principal();
+
+        Pantalla_Principal PR = new Pantalla_Principal();
         PR.setVisible(true);
         this.dispose();
-        
-        
+
+
     }//GEN-LAST:event_BtniraprincipalActionPerformed
 
     /**

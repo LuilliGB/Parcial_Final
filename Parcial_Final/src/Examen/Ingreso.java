@@ -211,7 +211,7 @@ public class Ingreso extends javax.swing.JFrame {
         }
         if (encontrar) {
             JOptionPane.showMessageDialog(rootPane, "Bienvenido a ingresar una tarea");
-            new Principal().setVisible(true);
+            new Pantalla_Principal().setVisible(true);
             this.dispose();
 
         }else{
