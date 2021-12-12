@@ -5,10 +5,10 @@
  */
 package Examen;
 
-/**
- *
- * @author dell
- */
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 public class Ingreso extends javax.swing.JFrame {
 
     /**
@@ -29,20 +29,32 @@ public class Ingreso extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         LabelTitulo = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        TxtContraseña = new javax.swing.JTextField();
+        TxtUsuario = new javax.swing.JTextField();
         BtnIngresar = new javax.swing.JButton();
         LabelUsuario = new javax.swing.JLabel();
         LabelContraseña = new javax.swing.JLabel();
         labelregistraerse = new javax.swing.JLabel();
         Btnregistrarse = new javax.swing.JButton();
+        Passwordcontraseña = new javax.swing.JPasswordField();
+        Checkvercontraseña = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         LabelTitulo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         LabelTitulo.setText("INGRESO AL SISTEMA");
 
+        TxtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtUsuarioActionPerformed(evt);
+            }
+        });
+
         BtnIngresar.setText("INGRESAR");
+        BtnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnIngresarActionPerformed(evt);
+            }
+        });
 
         LabelUsuario.setText("USUARIO");
 
@@ -52,12 +64,35 @@ public class Ingreso extends javax.swing.JFrame {
         labelregistraerse.setText("Si no te has registrado seleccione registrarse");
 
         Btnregistrarse.setText("REGISTRARSE");
+        Btnregistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnregistrarseActionPerformed(evt);
+            }
+        });
+
+        Passwordcontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordcontraseñaActionPerformed(evt);
+            }
+        });
+
+        Checkvercontraseña.setText("Ver contraseña");
+        Checkvercontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckvercontraseñaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(182, 182, 182)
+                .addComponent(Passwordcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Checkvercontraseña)
+                .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(95, 95, 95)
@@ -69,9 +104,8 @@ public class Ingreso extends javax.swing.JFrame {
                                     .addComponent(LabelUsuario)
                                     .addComponent(LabelContraseña))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                                    .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(50, 50, 50)
                                         .addComponent(BtnIngresar)))))
@@ -83,19 +117,22 @@ public class Ingreso extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 295, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(150, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Passwordcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Checkvercontraseña))
+                .addGap(123, 123, 123))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(LabelTitulo)
                     .addGap(63, 63, 63)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(LabelUsuario))
-                    .addGap(31, 31, 31)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TxtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LabelContraseña))
+                    .addGap(34, 34, 34)
+                    .addComponent(LabelContraseña)
                     .addGap(18, 18, 18)
                     .addComponent(BtnIngresar)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -123,6 +160,79 @@ public class Ingreso extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsuarioActionPerformed
+       TxtUsuario.setText("");
+       TxtUsuario.setForeground(Color.black);
+    }//GEN-LAST:event_TxtUsuarioActionPerformed
+
+    private void PasswordcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordcontraseñaActionPerformed
+        
+         Passwordcontraseña.setText("");
+        Passwordcontraseña.setForeground(Color.black);
+        
+        
+    }//GEN-LAST:event_PasswordcontraseñaActionPerformed
+
+    private void CheckvercontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckvercontraseñaActionPerformed
+     
+          if (Checkvercontraseña.isSelected()) {
+            Passwordcontraseña.setEchoChar((char)0);
+        }
+        else{
+            Passwordcontraseña.setEchoChar('*');
+        }
+        
+        
+    }//GEN-LAST:event_CheckvercontraseñaActionPerformed
+
+    private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
+      
+        
+        String usuario = TxtUsuario.getText();
+        String contraseña = Passwordcontraseña.getText();
+
+        boolean encontrar = false;
+
+        for (int i = 0; i < Registrarse.ArrayDatos.size() ; i++) {
+            
+            
+            if (Registrarse.ArrayDatos.get(i).getUsuario().equals(usuario) && Registrarse.ArrayDatos.get(i).getContraseña().equals(contraseña)) {
+           
+               
+                encontrar = true;
+                
+                break;
+            }else{
+                //JOptionPane.showMessageDialog(rootPane, "Informacion Incorrecta");
+                encontrar= false;
+            }
+
+        }
+        if (encontrar) {
+            JOptionPane.showMessageDialog(rootPane, "Bienvenido a ingresar una tarea");
+            new Principal().setVisible(true);
+            this.dispose();
+
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Informacion incorrecta, por favor verifique su usuario y contraseña");
+            Ingreso I = new Ingreso();
+            I.setVisible(true);
+            this.dispose();
+        }
+        
+        
+        
+    }//GEN-LAST:event_BtnIngresarActionPerformed
+
+    private void BtnregistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnregistrarseActionPerformed
+      
+        Registrarse R = new Registrarse();
+        R.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_BtnregistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,12 +272,13 @@ public class Ingreso extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnIngresar;
     private javax.swing.JButton Btnregistrarse;
+    private javax.swing.JCheckBox Checkvercontraseña;
     private javax.swing.JLabel LabelContraseña;
     private javax.swing.JLabel LabelTitulo;
     private javax.swing.JLabel LabelUsuario;
-    private javax.swing.JTextField TxtContraseña;
+    private javax.swing.JPasswordField Passwordcontraseña;
+    private javax.swing.JTextField TxtUsuario;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelregistraerse;
     // End of variables declaration//GEN-END:variables
 }

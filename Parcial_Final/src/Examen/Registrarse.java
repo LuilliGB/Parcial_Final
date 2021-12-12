@@ -79,6 +79,11 @@ public class Registrarse extends javax.swing.JFrame {
         Labelcorreo1.setText("Correo:");
 
         Btniraingreso1.setText("IR A INGRESO");
+        Btniraingreso1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btniraingreso1ActionPerformed(evt);
+            }
+        });
 
         Checkvercontraseña1.setText("VER CONTRASEÑA");
         Checkvercontraseña1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,12 +129,12 @@ public class Registrarse extends javax.swing.JFrame {
                                     .addComponent(Txtcorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(Passwordcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(Checkvercontraseña1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addComponent(Btnregistrarse)))
-                .addGap(19, 19, 19))
+                .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(5, 5, 5)
@@ -153,15 +158,15 @@ public class Registrarse extends javax.swing.JFrame {
                 .addComponent(Txtapellidos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Txtusuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Passwordcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Checkvercontraseña1))
                 .addGap(18, 18, 18)
                 .addComponent(Txtcorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(Btnregistrarse)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(Btniraingreso1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,6 +250,15 @@ public class Registrarse extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_BtnregistrarseActionPerformed
+
+    private void Btniraingreso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btniraingreso1ActionPerformed
+       
+        Ingreso I = new Ingreso();
+        I.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_Btniraingreso1ActionPerformed
 
     /**
      * @param args the command line arguments
