@@ -11,6 +11,17 @@ public class Datos {
     public Datos() {
     }
 
+    public Datos(String nombre, String apellidos, String Usuario, String contraseña, String correo) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.Usuario = Usuario;
+        this.contraseña = contraseña;
+        this.correo = correo;
+    }
+
+    
+    
+    
     public String getNombre() {
         return nombre;
     }
