@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
 
-  //  public static DefaultTableModel table;
+    public static DefaultTableModel table;
 
 
 
@@ -25,7 +25,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
      */
     public Pantalla_Principal() {
         initComponents();
-     //   table = (DefaultTableModel)Tabla.getModel();
+        table = (DefaultTableModel)Tablaprin.getModel();
        
       
     }
@@ -41,13 +41,13 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla = new javax.swing.JTable();
+        Tablaprin = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         Btniraprincipal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+        Tablaprin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -63,7 +63,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Tabla);
+        jScrollPane1.setViewportView(Tablaprin);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Tareas pendientes");
@@ -170,7 +170,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btniraprincipal;
-    public static javax.swing.JTable Tabla;
+    public static javax.swing.JTable Tablaprin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
