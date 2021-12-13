@@ -5,7 +5,21 @@
  */
 package Examen;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,10 +27,83 @@ import java.util.ArrayList;
  */
 public class AgregarTarea extends javax.swing.JFrame {
 
+    File Archivo = new File("Bloc de notas");
+    String opción = "Nuevo";
+
     ArrayList<Tareas> Arraytareas = new ArrayList<Tareas>();
 
-    public AgregarTarea() {
+    DefaultTableModel Tabla;
+
+    public AgregarTarea() throws IOException {
         initComponents();
+        Arraytareas = new ArrayList<Tareas>();
+        Tabla = (DefaultTableModel) TBL.getModel();
+        verificarArchivo();
+
+    }
+
+    private void verificarArchivo() throws IOException {
+        if (!Archivo.exists()) {
+            Archivo.createNewFile();
+            System.out.println("Archivo creado correctamente");
+
+        } else {
+            System.out.println("El archivo ya existe");
+            verificarInformación();
+        }
+    }
+
+    private void verificarInformación() throws FileNotFoundException, IOException {
+
+        String Línea = null;
+        int númeroRegistros = 0;
+
+        BufferedReader leer = new BufferedReader(new FileReader(Archivo));
+
+        while ((Línea = leer.readLine()) != null) {
+            númeroRegistros += 1;
+        }
+
+        leer.close();
+        if (númeroRegistros == 0) {
+            JOptionPane.showMessageDialog(rootPane, "El archivo se encuentra vacío");
+
+        } else {
+            String[][] Datos = new String[númeroRegistros][3];
+            int posición = 0;
+            String Línea_Leída = null;
+
+            BufferedReader leerarchivo = new BufferedReader(new FileReader(Archivo));
+
+            while ((Línea_Leída = leerarchivo.readLine()) != null) {
+
+                StringTokenizer St = new StringTokenizer(Línea_Leída, "\t");
+
+                Datos[posición][0] = St.nextToken().trim();
+                Datos[posición][1] = St.nextToken().trim();
+                Datos[posición][2] = St.nextToken().trim();
+
+                posición += 1;
+
+            }
+
+            leerarchivo.close();
+            DefaultTableModel modelo = (DefaultTableModel) TBL.getModel();
+            limpiarTabla(modelo);
+
+            for (int i = 0; i < Datos.length; i++) {
+
+                String[] data = new String[3];
+
+                for (int j = 0; j < Datos[i].length; j++) {
+                    data[(j)] = Datos[i][j];
+
+                }
+                modelo.addRow(data);
+
+            }
+
+        }
 
     }
 
@@ -40,6 +127,8 @@ public class AgregarTarea extends javax.swing.JFrame {
         TxtEncaragadotarea = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
         Btniraprincipal = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TBL = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,36 +161,56 @@ public class AgregarTarea extends javax.swing.JFrame {
             }
         });
 
+        TBL.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "FECHA", "NOMBRE", "ENCARGADO"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TBL);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Txtfechatarea)
-                            .addComponent(Txtnombretarea)
-                            .addComponent(TxtEncaragadotarea, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BtnGuardar)
-                            .addComponent(LabelTitulo))))
-                .addContainerGap(92, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Btniraprincipal)
-                .addGap(29, 29, 29))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Btniraprincipal)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addGap(46, 46, 46)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Txtfechatarea)
+                                .addComponent(Txtnombretarea)
+                                .addComponent(TxtEncaragadotarea, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(129, 129, 129)
+                            .addComponent(LabelTitulo))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(186, 186, 186)
+                            .addComponent(BtnGuardar))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,24 +230,28 @@ public class AgregarTarea extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(TxtEncaragadotarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(BtnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addComponent(Btniraprincipal)
-                .addGap(20, 20, 20))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,20 +263,57 @@ public class AgregarTarea extends javax.swing.JFrame {
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
 
-        Pantalla_Principal T = new Pantalla_Principal();
+        try {
+            
+            Tareas U = new Tareas();
+
+        U.setFecha(Txtfechatarea.getText());
+        U.setNombretarea(Txtnombretarea.getText());
+        U.setEncargado(TxtEncaragadotarea.getText());
+
+        Arraytareas.add(U);
+
+        Tabla.addRow(new Object[]{
+            U.getFecha(),
+            U.getNombretarea(),
+            U.getEncargado(),});
+            Ingresar();
+            
+        } catch (Exception e) {
+        }
+        
+        
+
+        /* Pantalla_Principal T = new Pantalla_Principal();
         T.setVisible(true);
-        String tarea = Txtfechatarea.getText();
-        String responsable = Txtnombretarea.getText();
-        String fecha = TxtEncaragadotarea.getText();
+        String fecha = Txtfechatarea.getText();
+        String nombre = Txtnombretarea.getText();
+        String encargado = TxtEncaragadotarea.getText();
 
-        String Datos[] = {tarea, responsable, fecha};
+        String Datos[] = {fecha, nombre, encargado};
 
-        Pantalla_Principal.table.addRow(Datos);
-        
-        this.dispose();
-        
+        Pantalla_Principal.table.addRow(Datos);*/
+
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
+    private void Ingresar() throws FileNotFoundException, UnsupportedEncodingException, IOException {
+
+        BufferedWriter escribirArchivo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Archivo, true), "utf-8"));
+        escribirArchivo.write(Txtfechatarea.getText() + "\t" + Txtnombretarea.getText() + "\t" + TxtEncaragadotarea.getText() + "\n");
+        JOptionPane.showMessageDialog(rootPane, "Datos ingresados");
+        escribirArchivo.close();
+        verificarInformación();
+
+    }
+
+    public void limpiarTabla(DefaultTableModel modelo){
+        
+        for (int i = TBL.getRowCount() -1; i >=0 ; i--) {
+            modelo.removeRow(i);           
+        }       
+    }
+    
+    
     private void BtniraprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtniraprincipalActionPerformed
 
         Pantalla_Principal PR = new Pantalla_Principal();
@@ -203,7 +353,11 @@ public class AgregarTarea extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarTarea().setVisible(true);
+                try {
+                    new AgregarTarea().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(AgregarTarea.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -212,6 +366,7 @@ public class AgregarTarea extends javax.swing.JFrame {
     private javax.swing.JButton BtnGuardar;
     private javax.swing.JButton Btniraprincipal;
     private javax.swing.JLabel LabelTitulo;
+    private javax.swing.JTable TBL;
     private javax.swing.JTextField TxtEncaragadotarea;
     private javax.swing.JTextField Txtfechatarea;
     private javax.swing.JTextField Txtnombretarea;
@@ -220,5 +375,6 @@ public class AgregarTarea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
