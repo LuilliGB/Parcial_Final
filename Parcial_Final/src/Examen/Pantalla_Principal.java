@@ -5,6 +5,9 @@
  */
 package Examen;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,11 +26,37 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     /**
      * Creates new form Pantalla_Principal
      */
+    
+    
+    
+    private final String ruta=System.getProperties().getProperty("user.dir");
     public Pantalla_Principal() {
         initComponents();
-        table = (DefaultTableModel)Tablaprin.getModel();
+        File archivo=null;
+        FileReader FilerR=null;
+        BufferedReader BufferedR=null;
+       // table = (DefaultTableModel)Tablaprin.getModel();
        
-      
+        try {
+            archivo=new File(ruta+"//BLOC.txt");
+            FilerR=new FileReader(archivo);
+            BufferedR=new BufferedReader(FilerR);
+            String informacion;
+            DefaultTableModel Tablatareas=new DefaultTableModel();
+            
+            Tablatareas.addColumn("Fecha");
+           // Tablatareas.addColumn("Nombre");
+          //  Tablatareas.addColumn("encargado");
+            while ((informacion=BufferedR.readLine())!=null){
+                System.err.println(informacion);
+                Tablatareas.addRow(new String[]{informacion});
+            
+        }
+            Tablaprin.setModel(table);
+        } catch (Exception e) {}finally{ try{if(null!=FilerR) {FilerR.close();}}catch(IOException e2){}
+        }
+       
+       
     }
 
     /**
@@ -52,17 +81,9 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Nombre", "Encargado"
+                "Title 1", "Title 2", "Title 3"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(Tablaprin);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -170,7 +191,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btniraprincipal;
-    public static javax.swing.JTable Tablaprin;
+    private javax.swing.JTable Tablaprin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
