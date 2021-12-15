@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class AgregarTarea extends javax.swing.JFrame {
 
     
-    public static LinkedList almacenar = new LinkedList();
+    public static ArrayList almacenar = new ArrayList();
     public int capturar;
     
    // File Archivo = new File("BLOC");

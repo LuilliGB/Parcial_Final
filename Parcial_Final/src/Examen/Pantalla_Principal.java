@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +24,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     // public static DefaultTableModel table;
     private DefaultTableModel modelo;
     int contador = 0;
-
+    
+public static ArrayList <Tareas> almacenar;
     /**
      * Creates new form Pantalla_Principal
      */
@@ -32,6 +35,9 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
         llamar();
         Cargar();
+        
+        almacenar = new ArrayList<Tareas>();
+        modelo = (DefaultTableModel) Tablaprin.getModel();
         //     File archivo=null;
         //     FileReader FilerR=null;
         //     BufferedReader BufferedR=null;
@@ -73,9 +79,15 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             modelo.setValueAt(T.getNombretarea(), contador, 1);
             modelo.setValueAt(T.getEncargado(), contador, 2);
         }
+        
+        
+        
 
     }
 
+ 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +102,9 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         Tablaprin = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         Btniraprincipal = new javax.swing.JButton();
+        BTNcrearreporte = new javax.swing.JButton();
+        Txtnombredocumento = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,30 +128,57 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             }
         });
 
+        BTNcrearreporte.setText("CREAR REPORTE");
+        BTNcrearreporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNcrearreporteActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("INGRESE EL NOMBRE DEL REPORTE");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Btniraprincipal)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(148, 148, 148)
-                            .addComponent(jLabel1))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addContainerGap()
+                            .addComponent(BTNcrearreporte)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btniraprincipal))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(148, 148, 148)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Txtnombredocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(Btniraprincipal))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(Txtnombredocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btniraprincipal, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(BTNcrearreporte)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,6 +213,16 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_BtniraprincipalActionPerformed
+
+    
+    
+    private void BTNcrearreporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNcrearreporteActionPerformed
+      
+        Reportes crear_reporte = new Reportes(Txtnombredocumento.getText(), new Date().toString(), "C:\\Users\\dell\\Downloads\\im.png", AgregarTarea.almacenar);
+        crear_reporte.CrearReporte();
+        
+        
+    }//GEN-LAST:event_BTNcrearreporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,9 +260,12 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNcrearreporte;
     private javax.swing.JButton Btniraprincipal;
     public static javax.swing.JTable Tablaprin;
+    private javax.swing.JTextField Txtnombredocumento;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
