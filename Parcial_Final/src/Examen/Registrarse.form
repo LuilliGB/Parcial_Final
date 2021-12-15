@@ -23,7 +23,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -57,7 +60,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="Txtapellidos1" pref="159" max="32767" attributes="0"/>
-                                          <Component id="Txtnombre" pref="159" max="32767" attributes="0"/>
+                                          <Component id="Txtnombre" max="32767" attributes="0"/>
                                           <Component id="Txtusuario1" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <Component id="Txtcorreo1" alignment="0" min="-2" pref="236" max="-2" attributes="0"/>
@@ -75,7 +78,7 @@
                           <Component id="Btnregistrarse" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="65" max="32767" attributes="0"/>
+                  <EmptySpace pref="125" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -86,7 +89,7 @@
                           <Component id="Labelcontraseña1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="Labelcorreo1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="476" max="32767" attributes="0"/>
+                      <EmptySpace pref="536" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>

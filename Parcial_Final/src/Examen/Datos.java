@@ -19,9 +19,6 @@ public class Datos {
         this.correo = correo;
     }
 
-    
-    
-    
     public String getNombre() {
         return nombre;
     }

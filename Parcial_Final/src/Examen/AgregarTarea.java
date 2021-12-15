@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,22 +28,26 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AgregarTarea extends javax.swing.JFrame {
 
-    File Archivo = new File("BLOC");
-    String opción = "Nuevo";
+    
+    public static LinkedList almacenar = new LinkedList();
+    public int capturar;
+    
+   // File Archivo = new File("BLOC");
+  //  String opción = "Nuevo";
 
-    ArrayList<Tareas> Arraytareas = new ArrayList<Tareas>();
+  //  ArrayList<Tareas> Arraytareas = new ArrayList<Tareas>();
 
-    DefaultTableModel Tabla;
+   // DefaultTableModel Tabla;
 
     public AgregarTarea() throws IOException {
         initComponents();
-        Arraytareas = new ArrayList<Tareas>();
-        Tabla = (DefaultTableModel) TBL.getModel();
-        verificarArchivo();
+    //    Arraytareas = new ArrayList<Tareas>();
+     //   Tabla = (DefaultTableModel) TBL.getModel();
+     //   verificarArchivo();
 
     }
 
-    private void verificarArchivo() throws IOException {
+   /* private void verificarArchivo() throws IOException {
         if (!Archivo.exists()) {
             Archivo.createNewFile();
             System.out.println("Archivo creado correctamente");
@@ -52,8 +57,8 @@ public class AgregarTarea extends javax.swing.JFrame {
             verificarInformación();
         }
     }
-
-    private void verificarInformación() throws FileNotFoundException, IOException {
+*/
+ /*   private void verificarInformación() throws FileNotFoundException, IOException {
 
         String Línea = null;
         int númeroRegistros = 0;
@@ -106,7 +111,7 @@ public class AgregarTarea extends javax.swing.JFrame {
         }
 
     }
-
+*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,9 +131,7 @@ public class AgregarTarea extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         TxtEncaragadotarea = new javax.swing.JTextField();
         BtnGuardar = new javax.swing.JButton();
-        Btniraprincipal = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TBL = new javax.swing.JTable();
+        BTNiratareas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,37 +150,19 @@ public class AgregarTarea extends javax.swing.JFrame {
 
         jLabel4.setText("Encargado tarea:");
 
-        BtnGuardar.setText("GUARDAR");
+        BtnGuardar.setText("CREAR TAREA");
         BtnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnGuardarActionPerformed(evt);
             }
         });
 
-        Btniraprincipal.setText("IR A PRINCIPAL");
-        Btniraprincipal.addActionListener(new java.awt.event.ActionListener() {
+        BTNiratareas.setText("IR A TAREAS PENDIENTES");
+        BTNiratareas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtniraprincipalActionPerformed(evt);
+                BTNiratareasActionPerformed(evt);
             }
         });
-
-        TBL.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "FECHA", "NOMBRE", "ENCARGADO"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(TBL);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -185,35 +170,30 @@ public class AgregarTarea extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(Btniraprincipal)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel1))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
-                                    .addGap(46, 46, 46)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Txtfechatarea)
-                                        .addComponent(Txtnombretarea)
-                                        .addComponent(TxtEncaragadotarea, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(129, 129, 129)
-                                    .addComponent(LabelTitulo))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(186, 186, 186)
-                                    .addComponent(BtnGuardar)))
-                            .addGap(154, 154, 154)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Txtfechatarea)
+                            .addComponent(Txtnombretarea)
+                            .addComponent(TxtEncaragadotarea, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(LabelTitulo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(BtnGuardar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(BTNiratareas)))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,13 +213,11 @@ public class AgregarTarea extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(TxtEncaragadotarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(43, 43, 43)
                 .addComponent(BtnGuardar)
-                .addGap(56, 56, 56)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
-                .addComponent(Btniraprincipal)
-                .addContainerGap(882, Short.MAX_VALUE))
+                .addComponent(BTNiratareas)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -247,14 +225,15 @@ public class AgregarTarea extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,7 +245,22 @@ public class AgregarTarea extends javax.swing.JFrame {
 
     private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
 
-        try {
+        String fecha=Txtfechatarea.getText();
+        String nombre=Txtnombretarea.getText();
+        String encargado=TxtEncaragadotarea.getText();
+        
+        
+        Tareas guardartarea = new Tareas(fecha, nombre, encargado);
+        almacenar.add(guardartarea);
+        
+        Txtfechatarea.setText("");
+       Txtnombretarea.setText("");
+        TxtEncaragadotarea.setText("");
+        
+        
+        
+        
+    /*    try {
             
             Tareas U = new Tareas();
 
@@ -299,32 +293,14 @@ public class AgregarTarea extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnGuardarActionPerformed
 
-    private void Ingresar() throws FileNotFoundException, UnsupportedEncodingException, IOException {
-
-        BufferedWriter escribirArchivo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Archivo, true), "utf-8"));
-        escribirArchivo.write(Txtfechatarea.getText() + "\t" + Txtnombretarea.getText() + "\t" + TxtEncaragadotarea.getText() + "\n");
-        JOptionPane.showMessageDialog(rootPane, "Datos ingresados");
-        escribirArchivo.close();
-        verificarInformación();
-
-    }
-
-    public void limpiarTabla(DefaultTableModel modelo){
+    private void BTNiratareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNiratareasActionPerformed
+ 
+       Pantalla_Principal ver = new Pantalla_Principal();
+       ver.setVisible(true);
         
-        for (int i = TBL.getRowCount() -1; i >=0 ; i--) {
-            modelo.removeRow(i);           
-        }       
-    }
-    
-    
-    private void BtniraprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtniraprincipalActionPerformed
-
-        Pantalla_Principal PR = new Pantalla_Principal();
-        PR.setVisible(true);
-        this.dispose();
-
-
-    }//GEN-LAST:event_BtniraprincipalActionPerformed
+        
+        
+    }//GEN-LAST:event_BTNiratareasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,10 +342,9 @@ public class AgregarTarea extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTNiratareas;
     private javax.swing.JButton BtnGuardar;
-    private javax.swing.JButton Btniraprincipal;
     private javax.swing.JLabel LabelTitulo;
-    private javax.swing.JTable TBL;
     private javax.swing.JTextField TxtEncaragadotarea;
     private javax.swing.JTextField Txtfechatarea;
     private javax.swing.JTextField Txtnombretarea;
@@ -378,6 +353,5 @@ public class AgregarTarea extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

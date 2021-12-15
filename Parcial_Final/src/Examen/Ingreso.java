@@ -91,8 +91,8 @@ public class Ingreso extends javax.swing.JFrame {
                 .addGap(182, 182, 182)
                 .addComponent(Passwordcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Checkvercontraseña)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addComponent(Checkvercontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(95, 95, 95)
@@ -210,7 +210,7 @@ public class Ingreso extends javax.swing.JFrame {
 
         }
         if (encontrar) {
-            JOptionPane.showMessageDialog(rootPane, "Bienvenido a ingresar una tarea");
+            JOptionPane.showMessageDialog(rootPane, "Bienvenido a las Tareas pendientes");
             new Pantalla_Principal().setVisible(true);
             this.dispose();
 

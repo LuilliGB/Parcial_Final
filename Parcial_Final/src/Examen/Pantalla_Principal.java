@@ -19,25 +19,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
 
-    public static DefaultTableModel table;
-
-
+    // public static DefaultTableModel table;
+    private DefaultTableModel modelo;
+    int contador = 0;
 
     /**
      * Creates new form Pantalla_Principal
      */
-    
-    
-    
-    private final String ruta=System.getProperties().getProperty("user.dir");
+    //  private final String ruta=System.getProperties().getProperty("user.dir");
     public Pantalla_Principal() {
         initComponents();
-        File archivo=null;
-        FileReader FilerR=null;
-        BufferedReader BufferedR=null;
-       // table = (DefaultTableModel)Tablaprin.getModel();
-       
-        try {
+
+        llamar();
+        Cargar();
+        //     File archivo=null;
+        //     FileReader FilerR=null;
+        //     BufferedReader BufferedR=null;
+        // table = (DefaultTableModel)Tablaprin.getModel();
+
+        /*  try {
             archivo=new File(ruta+"//BLOC.txt");
             FilerR=new FileReader(archivo);
             BufferedR=new BufferedReader(FilerR);
@@ -54,9 +54,26 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         }
             Tablaprin.setModel(table);
         } catch (Exception e) {}finally{ try{if(null!=FilerR) {FilerR.close();}}catch(IOException e2){}
+        }*/
+    }
+
+    public void llamar() {
+        String datos[][] = {};
+        String columna[] = {"FECHA", "NOMBRE", "ENCARGADO"};
+        modelo = new DefaultTableModel(datos, columna);
+        Tablaprin.setModel(modelo);
+    }
+
+    public void Cargar() {
+        Tareas T;
+        for (int i = 0; i < AgregarTarea.almacenar.size(); i++) {
+            T = (Tareas) AgregarTarea.almacenar.get(i);
+            modelo.insertRow(contador, new Object[]{});
+            modelo.setValueAt(T.getFecha(), contador, 0);
+            modelo.setValueAt(T.getNombretarea(), contador, 1);
+            modelo.setValueAt(T.getEncargado(), contador, 2);
         }
-       
-       
+
     }
 
     /**
@@ -74,7 +91,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Btniraprincipal = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Tablaprin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,32 +143,33 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtniraprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtniraprincipalActionPerformed
-        
+
         AgregarTarea AT;
         try {
             AT = new AgregarTarea();
-            
-            
-              AT.setVisible(true);
-        this.dispose();
+
+            AT.setVisible(true);
+            this.dispose();
         } catch (IOException ex) {
             Logger.getLogger(Pantalla_Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-        
-        
-        
+
+
     }//GEN-LAST:event_BtniraprincipalActionPerformed
 
     /**
@@ -191,7 +209,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btniraprincipal;
-    private javax.swing.JTable Tablaprin;
+    public static javax.swing.JTable Tablaprin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
