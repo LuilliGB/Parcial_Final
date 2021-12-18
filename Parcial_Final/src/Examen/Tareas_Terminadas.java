@@ -5,6 +5,8 @@
  */
 package Examen;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author dell
@@ -14,8 +16,18 @@ public class Tareas_Terminadas extends javax.swing.JFrame {
     /**
      * Creates new form Tareas_Terminadas
      */
+    
+    public static DefaultTableModel modelo2;
+    
+    
     public Tareas_Terminadas() {
         initComponents();
+        modelo2=new DefaultTableModel();
+        modelo2.addColumn("Fecha");
+        modelo2.addColumn("Nombre");
+        modelo2.addColumn("Encargado");
+        TablaTareasRealizadas.setModel(modelo2);
+        
     }
 
     /**

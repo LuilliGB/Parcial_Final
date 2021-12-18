@@ -21,14 +21,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
 
-    // public static DefaultTableModel table;
+  
     private DefaultTableModel modelo;
     int contador = 0;
     
-public static ArrayList <Tareas> almacenar;
+
     /**
      * Creates new form Pantalla_Principal
      */
+
+
+ DefaultTableModel table;
+
+ public static ArrayList <Tareas> almacenar;
     //  private final String ruta=System.getProperties().getProperty("user.dir");
     public Pantalla_Principal() {
         initComponents();
@@ -38,6 +43,19 @@ public static ArrayList <Tareas> almacenar;
         
         almacenar = new ArrayList<Tareas>();
         modelo = (DefaultTableModel) Tablaprin.getModel();
+        
+        
+        //pasar a tareas terminadas
+     //   modelo = new DefaultTableModel();
+  // modelo.addColumn("Fecha");
+  // modelo.addColumn("Nombre");
+   //     modelo.addColumn("Encargado");
+    //     Tablaprin.setModel(modelo);
+        
+        Tareas_Terminadas Tar = new Tareas_Terminadas();
+        Tar.setVisible(true);
+        
+        
         //     File archivo=null;
         //     FileReader FilerR=null;
         //     BufferedReader BufferedR=null;
@@ -63,6 +81,14 @@ public static ArrayList <Tareas> almacenar;
         }*/
     }
 
+    
+    public void nueva(){
+     
+     modelo=new DefaultTableModel();
+     Tablaprin.setModel(modelo);
+ }
+    
+    
     public void llamar() {
         String datos[][] = {};
         String columna[] = {"FECHA", "NOMBRE", "ENCARGADO"};
@@ -84,7 +110,7 @@ public static ArrayList <Tareas> almacenar;
         
 
     }
-
+//pasar a tareas terminadas
  
     
     
@@ -107,6 +133,7 @@ public static ArrayList <Tareas> almacenar;
         jLabel2 = new javax.swing.JLabel();
         BTNterminartarea = new javax.swing.JButton();
         BTNvertareas = new javax.swing.JButton();
+        Btnterminartodastareas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -140,11 +167,23 @@ public static ArrayList <Tareas> almacenar;
         jLabel2.setText("INGRESE EL NOMBRE DEL REPORTE");
 
         BTNterminartarea.setText("TERMINAR TAREA");
+        BTNterminartarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNterminartareaActionPerformed(evt);
+            }
+        });
 
         BTNvertareas.setText("VER TAREAS TERMINADAS");
         BTNvertareas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTNvertareasActionPerformed(evt);
+            }
+        });
+
+        Btnterminartodastareas.setText("TERMINAR TODAS");
+        Btnterminartodastareas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnterminartodastareasActionPerformed(evt);
             }
         });
 
@@ -160,14 +199,21 @@ public static ArrayList <Tareas> almacenar;
                                 .addGap(148, 148, 148)
                                 .addComponent(jLabel1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(Txtnombredocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Txtnombredocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(BTNterminartarea)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Btnterminartodastareas)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(BTNvertareas))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 123, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -175,12 +221,6 @@ public static ArrayList <Tareas> almacenar;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Btniraprincipal)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(BTNterminartarea)
-                .addGap(103, 103, 103)
-                .addComponent(BTNvertareas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,9 +229,10 @@ public static ArrayList <Tareas> almacenar;
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTNvertareas)
-                    .addComponent(BTNterminartarea))
+                    .addComponent(BTNterminartarea)
+                    .addComponent(Btnterminartodastareas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -251,6 +292,37 @@ public static ArrayList <Tareas> almacenar;
         
     }//GEN-LAST:event_BTNvertareasActionPerformed
 
+    private void BTNterminartareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNterminartareaActionPerformed
+        // TODO add your handling code here:
+        
+        int realizartarea=Tablaprin.getSelectedRow();
+        
+        if (realizartarea>=0) {
+            String Datos[]=new String[3];
+            Datos[0]=Tablaprin.getValueAt(realizartarea, 0).toString();
+            Datos[1]=Tablaprin.getValueAt(realizartarea, 1).toString();
+            Datos[2]=Tablaprin.getValueAt(realizartarea, 2).toString();
+            
+            Tareas_Terminadas.modelo2.addRow(Datos);
+            modelo.removeRow(realizartarea);
+        }
+       
+        
+    }//GEN-LAST:event_BTNterminartareaActionPerformed
+
+    private void BtnterminartodastareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnterminartodastareasActionPerformed
+        
+        for (int i = 0; i < Tablaprin.getRowCount(); i++) {
+            String Datos[]= new String[3];
+            Datos[0]=Tablaprin.getValueAt(i, 0).toString();
+            Datos[1]=Tablaprin.getValueAt(i, 1).toString();
+            Datos[2]=Tablaprin.getValueAt(i, 2).toString();
+            
+            Tareas_Terminadas.modelo2.addRow(Datos);
+        }
+        nueva();
+    }//GEN-LAST:event_BtnterminartodastareasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,6 +363,7 @@ public static ArrayList <Tareas> almacenar;
     private javax.swing.JButton BTNterminartarea;
     private javax.swing.JButton BTNvertareas;
     private javax.swing.JButton Btniraprincipal;
+    private javax.swing.JButton Btnterminartodastareas;
     public static javax.swing.JTable Tablaprin;
     private javax.swing.JTextField Txtnombredocumento;
     private javax.swing.JLabel jLabel1;

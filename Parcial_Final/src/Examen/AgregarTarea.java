@@ -297,7 +297,7 @@ public class AgregarTarea extends javax.swing.JFrame {
  
        Pantalla_Principal ver = new Pantalla_Principal();
        ver.setVisible(true);
-        
+       this.dispose();
         
         
     }//GEN-LAST:event_BTNiratareasActionPerformed
